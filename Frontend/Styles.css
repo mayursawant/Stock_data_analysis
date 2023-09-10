@@ -1,3 +1,4 @@
+/* Base styles for the body element including font, background color and transitions */
 body {
   font-family: 'Arial, sans-serif';
   background-color: #f4f4f4;
@@ -5,6 +6,7 @@ body {
   transition: background-color 0.3s;
 }
 
+/* Styles for the main container which includes background color, padding, and other properties */
 .container {
   width: 95%;
   margin: 0 auto;
@@ -15,11 +17,13 @@ body {
   text-align: center;
 }
 
+/* Header section styles including padding and border details */
 header {
   padding: 10px 0;
   border-bottom: 2px solid #e0e0e0;
 }
 
+/* Header title styles, defining font size, color, and text shadow */
 header h1 {
   font-size: 36px;
   color: #2c3e50;
@@ -27,6 +31,7 @@ header h1 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Search section styles, setting display properties and padding */
 .search-section {
   display: inline-block;
   width: 100%;
@@ -34,6 +39,7 @@ header h1 {
   text-align: center;
 }
 
+/* Styles for the search bar, including size, padding and border properties */
 #search-bar {
   width: 50%;
   padding: 10px;
@@ -43,11 +49,13 @@ header h1 {
   transition: border 0.3s, box-shadow 0.3s;
 }
 
+/* Styles applied to the search bar when it is focused */
 #search-bar:focus {
   border: 1px solid #3498db;
   box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
 }
 
+/* Styles for the search button, including background color and text properties */
 #search-button {
   padding: 10px 20px;
   background-color: #3498db;
@@ -59,10 +67,12 @@ header h1 {
   transition: background-color 0.3s;
 }
 
+/* Styles applied to the search button when it is hovered */
 #search-button:hover {
   background-color: #2980b9;
 }
 
+/* Styles for the controls section, defining display properties and padding */
 #controls {
   display: flex;
   justify-content: center;
@@ -70,17 +80,20 @@ header h1 {
   border-bottom: 3px solid #e0e0e0;
 }
 
+/* Styles for individual control groups within the controls section */
 .control-group {
   display: flex;
   align-items: center;
-  margin: 0  30px;
+  margin: 0 30px;
   transition: transform 0.3s;
 }
 
+/* Styles applied to the control group when it is hovered */
 .control-group:hover {
   transform: translateY(-3px);
 }
 
+/* Styles for labels within the control group */
 .control-group label {
   margin-right: 10px;
   margin-left: 20px;
@@ -88,6 +101,7 @@ header h1 {
   color: #000000;
 }
 
+/* Common styles for select and input elements within the control group */
 .control-group select,
 .control-group input {
   padding: 8px;
@@ -97,38 +111,45 @@ header h1 {
   transition: border 0.3s, box-shadow 0.3s;
 }
 
+/* Styles applied to select and input elements within the control group when they are focused */
 .control-group select:focus,
 .control-group input:focus {
   border: 1px solid #3498db;
   box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
 }
 
+/* Additional margin applied to the interval element */
 #interval {
   margin-right: 35px;
 }
 
+/* Styles for the chart container, defining height, margin and display properties */
 #chart-container {
   height: 500px;
   margin: 20px auto;
   display: block;
 }
 
+/* Styles for the indicator table section including padding */
 #indicator-table-section {
   padding: 20px 0;
 }
 
+/* Styles for the h2 element within the indicator table section, defining font size and color */
 #indicator-table-section h2 {
   font-size: 20px;
   color: #2c3e50;
   margin-bottom: 10px;
 }
 
-#table-container{
+/* Styles for the table container, defining height, margin and display properties */
+#table-container {
   height: 500px;
   margin: 20px auto;
   display: block;
 }
 
+/* Base styles for the indicator table, defining width, margin and other properties */
 #indicator-table {
   width: 100%;
   margin: 0 auto;
@@ -136,23 +157,25 @@ header h1 {
   display: block;
 }
 
+/* Styles for th and td elements within the indicator table, defining padding, border and other properties */
 #indicator-table th,
 #indicator-table td {
   padding: 8px;
   border: 1px solid #ecf0f1;
   text-align: center;
   font-size: 14px;
-  display: block; 
+  display: block;
   border: 1px solid #000;
   transition: background-color 0.3s;
 }
 
+/* Styles applied to th and td elements within the indicator table when they are hovered */
 #indicator-table th:hover,
 #indicator-table td:hover {
   background-color: #eaf7fc;
 }
 
-/* Adjusting the positions of Overlay and Get Indicator Table button */
+/* Adjusting the order and margin of the second and third control groups in the controls section */
 #controls .control-group:nth-child(2) {
   order: 2;
   margin-right: 100px;
@@ -163,16 +186,17 @@ header h1 {
   margin-right: 10px;
 }
 
+/* Adjusting margin for the indicator select and overlay elements */
 #indicator-select {
   margin-right: 20px;
 }
-
 
 #overlay {
   margin-right: 20px;
   margin-left: 20px;
 }
 
+/* Styles for the get indicator chart button including padding, background color and other properties */
 #get-indicator-chart {
   margin-left: 20px;
   padding: 10px 20px;
@@ -185,6 +209,7 @@ header h1 {
   transition: background-color 0.3s;
 }
 
+/* Styles applied to the get indicator chart button when it is hovered */
 #get-indicator-chart:hover {
   background-color: #218838;
 }
