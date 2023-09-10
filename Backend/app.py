@@ -1,0 +1,145 @@
+from flask_cors import CORS
+from flask import Flask, request, jsonify
+import boto3
+import pandas as pd
+import pandas_ta as ta
+import json
+
+# Initialize the DynamoDB resource and specify the region
+dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+table = dynamodb.Table('application')
+
+app = Flask(__name__)
+CORS(app)
+
+def fetch_data_from_dynamodb(symbol):
+    response = table.query(
+        KeyConditionExpression=boto3.dynamodb.conditions.Key('symbol').eq(symbol)
+    )
+    return response['Items']
+    
+def clean_data(data):
+    # Convert the date column to datetime and set it as the index
+    data['date'] = pd.to_datetime(data['date'])
+    data.set_index('date', inplace=True)
+
+    # Fill missing values in specified columns
+    cols_to_fill = ['close', 'open', 'high', 'low', 'volume']
+    data[cols_to_fill] = data[cols_to_fill].fillna(method='ffill')
+
+    # Filter records between 9:15 AM and 3:30 PM
+    filtered_df = data.between_time('09:15', '15:30')
+
+    return filtered_df
+
+def process_data(data, candle_interval):
+    interval_to_freq = {
+        '1 Min': '1Min',
+        '5 Min': '5Min',
+        '30 Min': '30Min',
+        '1 Hour': '1H',
+        '4 Hour': '4H',
+        '1 Day': 'D',
+        '1 Week': 'W'
+    }
+    
+    freq = interval_to_freq.get(candle_interval, '1D')
+    
+    df = data.copy()
+    
+    for col in ['open', 'high', 'low', 'close', 'volume']:
+        df[col] = pd.to_numeric(df[col], errors='coerce')
+
+    df_resampled = df.resample(freq).agg({'open': 'first', 'high': 'max', 'low': 'min', 'close': 'last', 'volume': 'sum'})
+   
+    df_resampled.fillna(method='ffill', inplace=True)
+    df_resampled.fillna(method='bfill', inplace=True) 
+    return df_resampled
+
+def process_indicator_data(data):
+    df = data.copy()
+    df.ta.adx(append=True)
+    df.ta.ao(append=True)
+    df.ta.aroon(append=True)
+    df.ta.atr(append=True)
+    df.ta.cci(append=True)
+    df.ta.chop(append=True)
+    df.ta.ema(append=True)
+    df.ta.hma(append=True)
+    df.ta.ichimoku(append=True)
+    df.ta.macd(append=True)
+    df.ta.mom(append=True)
+    df.ta.rsi(append=True)
+    df.ta.sma(append=True)
+    df.ta.uo(append=True)
+    df.ta.willr(append=True)
+    
+    df.fillna(method='ffill', inplace=True)
+    df.fillna(method='bfill', inplace=True) 
+  
+    return df 
+
+@app.route('/process_data/<symbol>/<candle_interval>', methods=['GET'])
+def get_processed_data(symbol, candle_interval):
+    try:
+        data = fetch_data_from_dynamodb(symbol)
+        if not data:
+            return jsonify({"error": f"No data found for symbol: {symbol}"}), 400
+        else:
+            clean_data_df = clean_data(pd.DataFrame(data))
+            processed_data = process_data(clean_data_df, candle_interval)
+            return jsonify([[row.Index.timestamp() * 1000, row.open, row.high, row.low, row.close] for row in processed_data.itertuples()])
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/indicator_plot/<symbol>/<candle_interval>/<indicator>', methods=['GET'])
+def get_indicator_plot(symbol, candle_interval, indicator):
+    try:
+        data = fetch_data_from_dynamodb(symbol)
+        if not data:
+            return jsonify({"error": f"No data found for symbol: {symbol}"}), 400
+        else:
+            clean_data_df = clean_data(pd.DataFrame(data))
+            processed_data = process_data(clean_data_df, candle_interval)
+            indicator_plot = process_indicator_data(processed_data)
+            return jsonify([[row.Index.timestamp() * 1000, getattr(row, indicator)] for row in indicator_plot.itertuples()]) 
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+        
+        
+@app.route('/indicator_table/<symbol>/<candle_interval>/<indicator>', methods=['GET'])
+def get_indicator_table(symbol, candle_interval, indicator):
+    try:
+        data = fetch_data_from_dynamodb(symbol)
+        if not data:
+            return jsonify({"error": f"No data found for symbol: {symbol}"}), 400
+        else:
+            clean_data_df = clean_data(pd.DataFrame(data))
+            
+            # Process the cleaned data and generate the indicator table
+            processed_data = process_data(clean_data_df, candle_interval)
+            indicator_table = process_indicator_data(processed_data)
+            
+            if not indicator_table.empty:
+                # Find the maximum timestamp from the index of indicator_table
+                max_timestamp = indicator_table.index.max()
+                
+                # Now, filter the table to only include rows with the maximum timestamp (latest bucket)
+                latest_bucket_data = indicator_table[indicator_table.index == max_timestamp]
+                
+                # Convert the DataFrame to a JSON object
+                result_json = latest_bucket_data.reset_index().drop(columns=["close", "open", "high", "low", "date", "volume"]).round(2).to_json(orient='records', date_format='iso')
+
+
+                return jsonify(json.loads(result_json))
+
+            else:
+                return jsonify({"error": "The indicator table is empty"}), 400
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+        
+    
+if __name__ == '__main__':
+    app.run(host='0.0.0.0',debug=True)
