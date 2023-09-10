@@ -26,15 +26,20 @@ Architecture:-
 --> Frontend and Backend code has been deployed on this same server 
 
 3) Dataflow 
-
-[Frontend]   --> [Argumenst passe using API Calls] --> [Backend] <---> Get Data from Dynamo DB
-                                                           
-[Frontend]   <--   [  Data passed using API Requests  ]     <--[Backend]
+![Architecture Diagram](image.png)
 
 
+Instructions for Front-end :- 
 
-**Instructions for accessing the front-end **
+ 1) Connect to http://3.84.81.214/  (Please make sure you are using the HTTP protocol )
 
+ 2) Search Button genertes Chandle STick graph and Indicator Table 
+
+ 3) Generate Indicator Plot will give us the plot and if Overlayed in ticked it will overlay another indicator grapgh on indicator plot along with both the indicators
+
+ 4) We can adjust Timeframe directly from the Candle-stick graph 
 
 
 Assumption:
+
+  1) We will be r
