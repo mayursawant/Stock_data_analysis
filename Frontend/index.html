@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <title>Stock Symbol Chart</title>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Stock Data Analysis <i class="fas fa-chart-line"></i></h1>
+    </header>
+    <div class="search-section">
+        <select id="search-bar">
+            <option value="" disabled selected>Select a symbol...</option>
+            <option value="ACC">ACC</option>
+            <option value="ADANIENT">ADANIENT</option>
+            <option value="ADANIGREEN">ADANIGREEN</option>
+            <option value="ADANIPORTS">ADANIPORTS</option>
+            <option value="AMBUJACEM">AMBUJACEM</option>
+            <option value="APOLLOHOSP">APOLLOHOSP</option>
+            <option value="ASIANPAINT">ASIANPAINT</option>
+            <option value="AUROPHARMA">AUROPHARMA</option>
+            <option value="AXISBANK">AXISBANK</option>
+            <option value="BAJAJAUTO">BAJAJ-AUTO</option>
+            <option value="BAJAJFINSV">BAJAJFINSV</option>
+            <option value="BAJAJHLDNG">BAJAJHLDNG</option>
+            <option value="BAJFINANCE">BAJFINANCE</option>
+            <option value="BANDHANBNK">BANDHANBNK</option>
+            <option value="BANKBARODA">BANKBARODA</option>
+            <option value="BERGEPAINT">BERGEPAINT</option>
+            <option value="BHARTIARTL">BHARTIARTL</option>
+            <option value="BIOCON">BIOCON</option>
+            <option value="BOSCHLTD">BOSCHLTD</option>
+            <option value="BPCL">BPCL</option>
+            <option value="BRITANNIA">BRITANNIA</option>
+            <option value="CHOLAFIN">CHOLAFIN</option>
+            <option value="CIPLA">CIPLA</option>
+            <option value="COALINDIA">COALINDIA</option>
+            <option value="COLPAL">COLPAL</option>
+            <option value="DABUR">DABUR</option>
+            <option value="DIVISLAB">DIVISLAB</option>
+            <option value="DLF">DLF</option>
+            <option value="DMART">DMART</option>
+            <option value="DRREDDY">DRREDDY</option>
+            <option value="EICHERMOT">EICHERMOT</option>
+            <option value="GAIL">GAIL</option>
+            <option value="GODREJCP">GODREJCP</option>
+            <option value="GRASIM">GRASIM</option>
+            <option value="HAVELLS">HAVELLS</option>
+            <option value="HCLTECH">HCLTECH</option>
+            <option value="HDFC">HDFC</option>
+            <option value="HDFCAMC">HDFCAMC</option>
+            <option value="HDFCBANK">HDFCBANK</option>
+            <option value="HDFCLIFE">HDFCLIFE</option>
+            <option value="HEROMOTOCO">HEROMOTOCO</option>
+            <option value="HINDALCO">HINDALCO</option>
+            <option value="HINDPETRO">HINDPETRO</option>
+            <option value="HINDUNILVR">HINDUNILVR</option>
+            <option value="ICICIBANK">ICICIBANK</option>
+            <option value="ICICIGI">ICICIGI</option>
+            <option value="ICICIPRULI">ICICIPRULI</option>
+            <option value="IGL">IGL</option>
+            <option value="INDIGO">INDIGO</option>
+            <option value="INDUSINDBK">INDUSINDBK</option>
+            <option value="INDUSTOWER">INDUSTOWER</option>
+            <option value="INFY">INFY</option>
+            <option value="IOC">IOC</option>
+            <option value="ITC">ITC</option>
+            <option value="JINDALSTEL">JINDALSTEL</option>
+            <option value="JSWSTEEL">JSWSTEEL</option>
+            <option value="JUBLFOOD">JUBLFOOD</option>
+            <option value="KOTAKBANK">KOTAKBANK</option>
+            <option value="LICI">LICI</option>
+            <option value="LT">LT</option>
+            <option value="LUPIN">LUPIN</option>
+            <option value="MARICO">MARICO</option>
+            <option value="MARUTI">MARUTI</option>
+            <option value="MCDOWELLN">MCDOWELL-N</option>
+            <option value="MM">MM</option>
+            <option value="MUTHOOTFIN">MUTHOOTFIN</option>
+            <option value="NAUKRI">NAUKRI</option>
+            <option value="NESTLEIND">NESTLEIND</option>
+            <option value="NIFTY50">NIFTY 50</option>
+            <option value="NIFTYBANK">NIFTY BANK</option>
+            <option value="NMDC">NMDC</option>
+            <option value="NTPC">NTPC</option>
+            <option value="ONGC">ONGC</option>
+            <option value="PEL">PEL</option>
+            <option value="PGHH">PGHH</option>
+            <option value="PIDILITIND">PIDILITIND</option>
+            <option value="PIIND">PIIND</option>
+            <option value="PNB">PNB</option>
+            <option value="POWERGRID">POWERGRID</option>
+            <option value="RELIANCE">RELIANCE</option>
+            <option value="SAIL">SAIL</option>
+            <option value="SBICARD">SBICARD</option>
+            <option value="SBILIFE">SBILIFE</option>
+            <option value="SBIN">SBIN</option>
+            <option value="SHREECEM">SHREECEM</option>
+            <option value="SIEMENS">SIEMENS</option>
+            <option value="SUNPHARMA">SUNPHARMA</option>
+            <option value="TATACONSUM">TATACONSUM</option>
+            <option value="TATAMOTORS">TATAMOTORS</option>
+            <option value="TATASTEEL">TATASTEEL</option>
+            <option value="TCS">TCS</option>
+            <option value="TECHM">TECHM</option>
+            <option value="TITAN">TITAN</option>
+            <option value="TORNTPHARM">TORNTPHARM</option>
+            <option value="UPL">UPL</option>
+            <option value="ULTRACEMCO">ULTRACEMCO</option>
+            <option value="VEDL">VEDL</option>
+            <option value="WIPRO">WIPRO</option>
+            <option value="YESBANK">YESBANK</option>
+        </select>
+        <button id="search-button"><i class="fas fa-search"></i> Search</button>
+    </div>
+    <div id="controls">
+        <div class="control-group">
+            <label for="interval">Candle Interval: </label>
+            <select id="interval">
+                <option value="1 Day">1 Day</option>
+                <option value="1 Min">1 Min</option>
+                <option value="5 Min">5 Min</option>
+                <option value="30 Min">30 Min</option>
+                <option value="1 Hour">1 Hour</option>
+                <option value="4 Hour">4 Hour</option>
+                <option value="1 Week">1 Week</option>
+            </select>
+
+        </div>
+
+        <div class="control-group">
+            <label for="indicator-select">Indicator: </label>
+            <select id="indicator-select">
+                <option value="ADX">ADX</option>
+                <option value="AO">AO</option>
+                <option value="AROOND">AROON_DOWN</option>
+                <option value="AROONU">AROON_UP</option>
+                <option value="AROONOSC">AROON_OSC</option>
+                <option value="ATR">ATR</option>
+                <option value="CCI">CCI</option>
+                <option value="CHOP">CHOP</option>
+                <option value="EMA">EMA</option>
+                <option value="HMA">HMA</option>
+                <option value="MACD">MACD</option>
+                <option value="MOM">MOM</option>
+                <option value="RSI">RSI</option>
+                <option value="SMA">SMA</option>
+                <option value="UO">UO</option>
+                <option value="WILLR">WILLR</option>
+                <option value="ISA_9">ICHIMOKU_SEN_A_9</option>
+                <option value="ISB_26">ICHIMOKU_SEN_B_26</option>
+                <option value="ITS_9">ICHIMOKU_TENKAN_SEN_9</option>
+                <option value="IKS_26">ICHIMOKU_KIJUN_SEN_26</option>
+                <option value="ICS_26">ICHIMOKU_CHIKOU_SPAN_26</option>
+            </select>
+
+            <label for="overlay">Overlay: </label>
+            <input type="checkbox" id="overlay">
+            <button id="get-indicator-chart">Generate Indicator Chart</button>
+        </div>
+    </div>
+    <div id="chart-container"></div>
+    <div id="indicator-chart-container"></div>
+    <h3>Indicator Details</h3>
+    <div id="message"></div>
+    <div id="table-container"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
