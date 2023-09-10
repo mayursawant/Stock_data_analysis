@@ -23,12 +23,12 @@ def clean_data(data):
     data['date'] = pd.to_datetime(data['date'])
     data.set_index('date', inplace=True)
 
-    # Fill missing values in specified columns
-    cols_to_fill = ['close', 'open', 'high', 'low', 'volume']
-    data[cols_to_fill] = data[cols_to_fill].fillna(method='ffill')
-
     # Filter records between 9:15 AM and 3:30 PM
     filtered_df = data.between_time('09:15', '15:30')
+
+    # Fill missing values in specified columns using Forward Fill method
+    cols_to_fill = ['close', 'open', 'high', 'low', 'volume']
+    filtered_df[cols_to_fill] = filtered_df[cols_to_fill].fillna(method='ffill')
 
     return filtered_df
 
