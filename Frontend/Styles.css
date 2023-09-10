@@ -1,0 +1,190 @@
+body {
+  font-family: 'Arial, sans-serif';
+  background-color: #f4f4f4;
+  margin: 0;
+  transition: background-color 0.3s;
+}
+
+.container {
+  width: 95%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #eaf7fc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+header {
+  padding: 10px 0;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+header h1 {
+  font-size: 36px;
+  color: #2c3e50;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-section {
+  display: inline-block;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+}
+
+#search-bar {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #bdc3c7;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+#search-bar:focus {
+  border: 1px solid #3498db;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+}
+
+#search-button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+#search-button:hover {
+  background-color: #2980b9;
+}
+
+#controls {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  border-bottom: 3px solid #e0e0e0;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  margin: 0  30px;
+  transition: transform 0.3s;
+}
+
+.control-group:hover {
+  transform: translateY(-3px);
+}
+
+.control-group label {
+  margin-right: 10px;
+  margin-left: 20px;
+  font-size: 18px;
+  color: #000000;
+}
+
+.control-group select,
+.control-group input {
+  padding: 8px;
+  border: 1px solid #bdc3c7;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.control-group select:focus,
+.control-group input:focus {
+  border: 1px solid #3498db;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+}
+
+#interval {
+  margin-right: 35px;
+}
+
+#chart-container {
+  height: 500px;
+  margin: 20px auto;
+  display: block;
+}
+
+#indicator-table-section {
+  padding: 20px 0;
+}
+
+#indicator-table-section h2 {
+  font-size: 20px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+#table-container{
+  height: 500px;
+  margin: 20px auto;
+  display: block;
+}
+
+#indicator-table {
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  display: block;
+}
+
+#indicator-table th,
+#indicator-table td {
+  padding: 8px;
+  border: 1px solid #ecf0f1;
+  text-align: center;
+  font-size: 14px;
+  display: block; 
+  border: 1px solid #000;
+  transition: background-color 0.3s;
+}
+
+#indicator-table th:hover,
+#indicator-table td:hover {
+  background-color: #eaf7fc;
+}
+
+/* Adjusting the positions of Overlay and Get Indicator Table button */
+#controls .control-group:nth-child(2) {
+  order: 2;
+  margin-right: 100px;
+}
+
+#controls .control-group:nth-child(3) {
+  order: 1;
+  margin-right: 10px;
+}
+
+#indicator-select {
+  margin-right: 20px;
+}
+
+
+#overlay {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+#get-indicator-chart {
+  margin-left: 20px;
+  padding: 10px 20px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+#get-indicator-chart:hover {
+  background-color: #218838;
+}
